@@ -7,7 +7,7 @@ set -e
 
 # Navigate to the Laravel backend directory
 echo "Building Laravel backend..."
-cd Live-Code-Editor-codeEditor/
+cd Gradution_Project_ITI_Backend/ Live-Code-Editor-codeEditor/
 composer install --no-dev --prefer-dist
 php artisan migrate --force
 
