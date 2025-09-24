@@ -3,27 +3,28 @@
 # Exit immediately if a command exits with a non-zero status.
 set -e
 
+# Navigate into the main project directory
+echo "Navigating into the project directory..."
+cd Live-Code-Editor-codeEditor/
+
 # --- Build Phase ---
 
-# Navigate to the Laravel backend directory
+# Build and install dependencies for the Laravel backend
 echo "Building Laravel backend..."
-cd  Live-Code-Editor-codeEditor/
 composer install --no-dev --prefer-dist
 php artisan migrate --force
 
-# Navigate back to the root and then to the Node.js directory
+# Navigate to the Node.js directory to install dependencies
 echo "Building Node.js server..."
-cd ../realtime-server/
+cd realtime-server/
 npm install
 
 # --- Start Phase ---
 
-# Navigate back to the root to start the services
-cd ..
-
-# Start the Laravel backend in the background
+# Navigate back to the main project folder to start Laravel
+cd ../
 echo "Starting Laravel backend..."
-php artisan serve --host=0.0.0.0 --port=8000 &
+php artisan serve --host=0.0.0.0 --port=$PORT &
 
 # Start the Node.js server
 echo "Starting Node.js server..."
